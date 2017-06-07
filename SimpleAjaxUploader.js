@@ -1223,17 +1223,18 @@ ss.IframeUpload = {
             iframeLoaded = false,
             cancel;
 
-        if ( opts.noParams === true ) {
-            url = opts.url;
-
-        } else {
-            // If we're using Nginx Upload Progress Module, append upload key to the URL
-            // Also, preserve query string if there is one
-            url = !opts.nginxProgressUrl ?
-                    opts.url :
-                    url + ( ( url.indexOf( '?' ) > -1 ) ? '&' : '?' ) +
-                          encodeURIComponent( opts.nginxProgressHeader ) + '=' + encodeURIComponent( key );
-        }
+        // if ( opts.noParams === true ) {
+        //     url = opts.url;
+        //
+        // } else {
+        //     // If we're using Nginx Upload Progress Module, append upload key to the URL
+        //     // Also, preserve query string if there is one
+        //     url = !opts.nginxProgressUrl ?
+        //             opts.url :
+        //             url + ( ( url.indexOf( '?' ) > -1 ) ? '&' : '?' ) +
+        //                   encodeURIComponent( opts.nginxProgressHeader ) + '=' + encodeURIComponent( key );
+        // }
+        url = !opts.nginxProgressUrl ? opts.url : opts.url + ((opts.url.indexOf('?') > -1) ? '&' : '?') + encodeURIComponent(opts.nginxProgressHeader) + '=' + encodeURIComponent(key);
 
         form = ss.getForm({
             action: url,
